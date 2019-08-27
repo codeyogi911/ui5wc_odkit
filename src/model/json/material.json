@@ -1,0 +1,70 @@
+{
+    "materialId": "DSCDSC32321",
+    "reservationNumber": "78326482999",
+    "name": "Ikea Drill Kit",
+    "refList": [
+        {
+            "id": 1,
+            "name": "Drill",
+            "partid": "1541218541AS",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 2,
+            "name": "Screw",
+            "partid": "1541454541A9",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 3,
+            "name": "Bit 1",
+            "partid": "1DCFV18541AS",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 4,
+            "name": "Bit 8",
+            "partid": "132323241AV",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 5,
+            "name": "Bit 2",
+            "partid": "CD1218541AS",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 6,
+            "name": "Bit 6",
+            "partid": "WDD3343541AS",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 7,
+            "name": "Sisors",
+            "partid": "FSV534224200",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 8,
+            "name": "Screw 2",
+            "partid": "CDRVR44342",
+            "status": "Expected",
+            "GI": 1
+        },
+        {
+            "id": 9,
+            "name": "Knife",
+            "partid": "FDSDASC33242F",
+            "status": "Expected",
+            "GI": 1
+        }
+    ]
+}

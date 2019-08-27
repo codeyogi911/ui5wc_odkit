@@ -1,69 +1,58 @@
 <template>
-  <div class="image-capture">
-    <ui5-card
-      avatar="sap-icon://add-photo"
-      heading="Detection View"
-      subtitle="Ikea Drill Machine 202.26.401"
-      v-bind:status="imageHtml === null?'Not Detected':'Kit Detected'"
-      class="medium"
-    >
-      <div class="card-content">
-        <ui5-busyindicator ref="busycontainer" id="busycontainer" size="Medium">
-          <div class="col">
-            <div class="row">
-              <span v-html="imageHtml" v-show="imageHtml !== null" />
+  <ui5-card
+    avatar="sap-icon://add-photo"
+    heading="Detection View"
+    subtitle="Ikea Drill Machine 202.26.401"
+    v-bind:status="imageHtml === null?'Not Detected':'Kit Detected'"
+    class="medium sticky"
+  >
+    <div class="card-content">
+      <ui5-busyindicator ref="busycontainer" id="busycontainer" size="Medium">
+        <div class="col">
+          <span v-html="imageHtml" v-show="imageHtml !== null" />
+          <video
+            v-show="imageHtml === null"
+            ref="video"
+            id="video"
+            width="100%"
+            height="100%"
+            autoplay
+          ></video>
+          <ui5-messagestrip
+            v-show="imageHtml === null"
+            type="Information"
+            no-close-button
+          >Place the kit in frame and click detect.</ui5-messagestrip>
+          <ui5-messagestrip
+            v-show="imageHtml !== null"
+            type="Positive"
+            no-close-button
+          >Objects were detected in {{requestDuration}} seconds</ui5-messagestrip>
+          <ui5-button
+            @press="reset()"
+            v-show="imageHtml !== null"
+            class="button"
+            icon="sap-icon://refresh"
+            aria-labelledby="lblAway"
+          >Run Again</ui5-button>
+          <ui5-button
+            class="button"
+            design="Default"
+            @press="capture()"
+            v-show="imageHtml === null"
+          >Detect</ui5-button>
+        </div>
+        <ui5-popover ref="resultsPopover" header-text="Results">
+          <div class="popover-content">
+            <div class="flex-column">
+              <ui5-label>{{errorMessage}}</ui5-label>
             </div>
-            <div class="row" v-show="imageHtml === null">
-              <video ref="video" id="video" width="640" height="480" autoplay></video>
-            </div>
-            <ui5-messagestrip
-              v-show="imageHtml === null"
-              type="Information"
-              no-close-button
-            >Place the kit in frame and click detect.</ui5-messagestrip>
-            <ui5-messagestrip
-              v-show="imageHtml !== null"
-              type="Positive"
-              no-close-button
-            >Objects were detected in {{requestDuration}} seconds</ui5-messagestrip>
-            <!-- <div class="row "> -->
-            <ui5-button
-              @press="reset()"
-              v-show="imageHtml !== null"
-              class="image-capture"
-              icon="sap-icon://refresh"
-              aria-labelledby="lblAway"
-            >Run Again</ui5-button>
-            <ui5-button
-              class="image-capture"
-              design="Default"
-              @press="capture()"
-              v-show="imageHtml === null"
-            >Detect</ui5-button>
-            <!-- </div> -->
           </div>
-          <ui5-popover ref="resultsPopover" header-text="Detection Results">
-            <div class="popover-content">
-              <div class="flex-column">
-                <ui5-label>Nothing Found! Try Again</ui5-label>
-              </div>
-            </div>
-            <!-- <div slot="footer" class="popover-footer">
-              <div style="flex: 1;"></div>
-              <ui5-button id="closePopoverButton" design="Emphasized">Try Again</ui5-button>
-            </div>-->
-          </ui5-popover>
-          <!-- <button id="snap" v-on:click="capture()">Snap Photo</button> -->
-          <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
-          <!-- <ul>
-            <li v-for="c in captures">
-              <img v-bind:src="c" height="200" />
-            </li>
-          </ul>-->
-        </ui5-busyindicator>
-      </div>
-    </ui5-card>
-  </div>
+        </ui5-popover>
+        <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+      </ui5-busyindicator>
+    </div>
+  </ui5-card>
 </template>
 
 <script>
@@ -79,6 +68,8 @@ export default {
   data() {
     return {
       imageHtml: null,
+      errorMessage: "Nothing found. Try again.",
+      requestDuration: 0,
       video: {},
       canvas: {},
       captures: []
@@ -139,6 +130,7 @@ export default {
             if (data.image) {
               that.imageHtml = data.image;
             } else {
+              that.errorMessage = "Nothing found. Try again.";
               that.video.play();
               that.resultsPopover.openBy(that.video);
             }
@@ -148,35 +140,12 @@ export default {
           }) // JSON-string from `response.json()` call
           .catch(error => {
             that.busyIndicator.active = false;
-            // console.error(error);
+            that.errorMessage = error.message + ", cannot connect to service";
+            that.video.play();
+            that.resultsPopover.openBy(that.video);
           });
       });
     }
   }
 };
 </script>
-
-<style>
-/* .toolbar{
-
-} */
-.image-capture {
-  padding: 2rem;
-}
-.card-content {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-#video {
-  background-color: transparent;
-  padding: 2rem;
-}
-#canvas {
-  display: none;
-}
-li {
-  display: inline;
-  padding: 5px;
-}
-</style>

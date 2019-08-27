@@ -1,2 +1,44 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
+
+.sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1rem;
+  }
+
+.card-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card-padding {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
+    &-noleft {
+        @extend .card-padding;
+        padding-left: 0rem;
+        padding-right: 1rem;
+    }
+
+    &-noright {
+        @extend .card-padding;
+        padding-right: 0rem;
+        padding-left: 1rem;
+    }
+}
+
+.button {
+    padding: 1rem;
+}
+
+#video {
+    background-color: transparent;
+    padding-top: 1rem;
+}
+
+#canvas {
+    display: none;
+}
