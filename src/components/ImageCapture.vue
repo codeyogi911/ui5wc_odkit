@@ -9,13 +9,13 @@
     <div class="card-content">
       <ui5-busyindicator ref="busycontainer" id="busycontainer" size="Medium">
         <div class="col">
-          <span v-html="imageHtml" v-show="imageHtml !== null" />
+          <div v-html="imageHtml" v-show="imageHtml !== null" />
           <video
             v-show="imageHtml === null"
             ref="video"
             id="video"
-            width="100%"
-            height="100%"
+            width="640"
+            height="480"
             autoplay
           ></video>
           <ui5-messagestrip

@@ -1,16 +1,21 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
+.table-cell {
+    padding: 0rem
+}
+
 .sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 1rem;
-  }
+}
 
 .card-content {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    text-align: center;
 }
 
 .card-padding {
@@ -36,7 +41,7 @@
 
 #video {
     background-color: transparent;
-    padding-top: 1rem;
+    margin-top: 1rem;
 }
 
 #canvas {

@@ -5,64 +5,212 @@
         <ui5-icon src="nav-back" slot="icon"></ui5-icon>
       </ui5-shellbar>
     </header>
-    <section class="button">
-    <div class="row">
-      <div class="col-sm-7">
-        <ui5-list
-          id="myList"
-          separators="Inner"
-          no-data-text="No Data Available"
-          class="full-width"
-          header-text="MIS Instrumente"
-        >
+    <section style="padding:1rem;">
+      <div class="row">
+        <div class="col-sm-7">
           <ui5-card
+            v-bind:subtitle="'Serial Number: '+materialData.serial"
             v-bind:heading="materialData.name"
             class="small"
-            slot="header"
           >
             <div class="button">
               <div class="row">
                 <div class="col">
-                  <ui5-label id="myLabel" for="materialId">Material ID</ui5-label>
-              <ui5-input
-                id="materialId"
-                aria-labelledby="myLabel"
-                readonly
-                v-bind:value="materialData.materialId"
-              ></ui5-input>
+                  <ui5-label id="combined-runlbl" for="combined-run">Combined Run</ui5-label>
+                  <ui5-input
+                    id="combined-run"
+                    aria-labelledby="combined-runlbl"
+                    readonly
+                    v-bind:value="materialData.combinedRun"
+                  ></ui5-input>
+                  <ui5-label id="customerlbl" for="customer">Customer</ui5-label>
+                  <ui5-input
+                    id="customer"
+                    aria-labelledby="customerlbl"
+                    readonly
+                    v-bind:value="materialData.customer"
+                  ></ui5-input>
+                  <ui5-label id="myLabel" for="materialId">Material</ui5-label>
+                  <ui5-input
+                    id="materialId"
+                    aria-labelledby="myLabel"
+                    readonly
+                    v-bind:value="materialData.materialId"
+                  ></ui5-input>
                 </div>
                 <div class="col">
-                  <ui5-label id="myLabel2" for="materialId2">Reservation Number</ui5-label>
-              <ui5-input
-                id="materialId2"
-                aria-labelledby="myLabel"
-                readonly
-                v-bind:value="materialData.reservationNumber"
-              ></ui5-input>
+                  <ui5-label id="myLabel2" for="materialId2">Reservation</ui5-label>
+                  <ui5-input
+                    id="materialId2"
+                    aria-labelledby="myLabel"
+                    readonly
+                    v-bind:value="materialData.reservationNumber"
+                  ></ui5-input>
+                  <ui5-label id="equipmentlbl" for="equipment">Equipment</ui5-label>
+                  <ui5-input
+                    id="equipment"
+                    aria-labelledby="equipmentlbl"
+                    readonly
+                    v-bind:value="materialData.equipment"
+                  ></ui5-input>
+                  <ui5-label id="objtyplbl" for="objtyp">Object Type</ui5-label>
+                  <ui5-input
+                    id="objtyp"
+                    aria-labelledby="objtyplbl"
+                    readonly
+                    v-bind:value="materialData.objecttype"
+                  ></ui5-input>
                 </div>
               </div>
-              
+              <div class="row" style="padding-top:1.5rem">
+                <ui5-table class="demo-table" id="table" ref="table">
+                  <!-- Columns -->
+                  <ui5-table-column slot="columns" class="table-cell" width="100px">
+                    <span style="line-height: 1.4rem">Material</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column
+                    slot="columns"
+                    popin-text="Desc."
+                    class="table-cell"
+                    width="180px"
+                  >
+                    <span style="line-height: 1.4rem">Description</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column
+                    slot="columns"
+                    popin-text="Batch"
+                    demand-popin
+                    class="table-cell"
+                    width="50px"
+                  >
+                    <span style="line-height: 1.4rem">Batch</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column
+                    slot="columns"
+                    popin-text="Serial No."
+                    demand-popin
+                    class="table-cell"
+                    width="150px"
+                  >
+                    <span style="line-height: 1.4rem">Serial Number</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column slot="columns" width="70px" class="table-cell">
+                    <span style="line-height: 1.4rem">Issued</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column slot="columns" width="70px" class="table-cell">
+                    <span style="line-height: 1.4rem">Recieved</span>
+                  </ui5-table-column>
+                  <ui5-table-column slot="columns" width="70px" class="table-cell">
+                    <span style="line-height: 1.4rem">Missing</span>
+                  </ui5-table-column>
+                  <ui5-table-column slot="columns" width="70px" class="table-cell">
+                    <span style="line-height: 1.4rem">Damaged</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column slot="columns" class="table-cell">
+                    <span style="line-height: 1.4rem">Actions</span>
+                  </ui5-table-column>
+
+                  <ui5-table-column slot="columns" class="table-cell">
+                    <span style="line-height: 1.4rem">Status</span>
+                  </ui5-table-column>
+                  <!-- Rows -->
+                  <ui5-table-row v-for="item in items" v-bind:key="item.id">
+                    <!-- Cells -->
+                    <ui5-table-cell class="table-cell">
+                      <p style="font-weight:bold">{{item.material}}</p>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <p>{{item.name}}</p>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <p>{{item.batch}}</p>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <p>{{item.serial}}</p>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <p>{{item.GI}}</p>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <ui5-input
+                        v-bind:ref="'inputRcv'+item.id"
+                        v-bind:readonly="item.readonly"
+                        v-bind:value="item.GR"
+                      ></ui5-input>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <ui5-input
+                        v-bind:readonly="item.readonly"
+                        v-bind:value="item.GM"
+                        v-bind:ref="'inputMissing'+item.id"
+                      ></ui5-input>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <ui5-input
+                        v-bind:readonly="item.readonly"
+                        v-bind:value="item.GD"
+                        v-bind:ref="'inputDamaged'+item.id"
+                      ></ui5-input>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <ui5-button
+                        v-bind:ref="'verifyBtn'+item.id"
+                        @click="verify(item)"
+                        style="padding-right:0.25rem"
+                        icon="sap-icon://accept"
+                        design="Positive"
+                      ></ui5-button>
+                      <ui5-button @click="editPress(item)" icon="sap-icon://edit"></ui5-button>
+                    </ui5-table-cell>
+                    <ui5-table-cell class="table-cell">
+                      <ui5-badge v-bind:color-scheme="item.status === 'Not Detected'?1:8">
+                        <ui5-icon
+                          v-bind:src="item.status==='Not Detected'?'sap-icon://message-warning':'sap-icon://accept'"
+                          slot="icon"
+                        ></ui5-icon>
+                        {{item.status}}
+                      </ui5-badge>
+                      <ui5-badge v-bind:color-scheme="8" v-show="item.GR > 0">
+                        <ui5-icon v-bind:src="'sap-icon://accept'" slot="icon"></ui5-icon>Recieved
+                      </ui5-badge>
+                      <ui5-badge v-bind:color-scheme="1" v-show="item.GM > 0">
+                        <ui5-icon v-bind:src="'sap-icon://message-warning'" slot="icon"></ui5-icon>Missing
+                      </ui5-badge>
+                      <ui5-badge v-bind:color-scheme="item.verified?8:2">
+                        <ui5-icon
+                          v-bind:src="item.verified?'sap-icon://accept':'sap-icon://message-error'"
+                          slot="icon"
+                        ></ui5-icon>
+                        {{item.verified?'Verified':'Not Verified'}}
+                      </ui5-badge>
+                    </ui5-table-cell>
+                  </ui5-table-row>
+                </ui5-table>
+              </div>
             </div>
           </ui5-card>
-          <ui5-li-groupheader>Expected Items</ui5-li-groupheader>
-          <ui5-li
-            v-bind:icon="item.status==='Expected'?'sap-icon://warning':'sap-icon://accept'"
-            v-for="item in items"
-            v-bind:key="item.id"
-            v-bind:info="item.status"
-            v-bind:info-state="item.status==='Expected'?'Warning':'Success'"
-            v-bind:description="item.partid"
-          >{{ item.name }}</ui5-li>
-          <!-- <ui5-li-groupheader>Custom List</ui5-li-groupheader>
-          <ui5-li-custom v-for="item in items" v-bind:key="item.id">
-            <p>{{ item.name }}</p>
-          </ui5-li-custom> -->
-        </ui5-list>
+          <ui5-popover ref="verifyPopover" header-text="Invalid Entry">
+            <div class="popover-content">
+              <div class="flex-column">
+                <p>The values don't add up. Please check.</p>
+              </div>
+            </div>
+            <!-- <div slot="footer" class="popover-footer">
+              <div style="flex: 1;"></div>
+              <ui5-button id="closePopoverButton" design="Emphasized">Subscribe</ui5-button>
+            </div>-->
+          </ui5-popover>
+        </div>
+        <div class="col-sm-5">
+          <image-capture @reset="reset" @detected="onDetectionComplete"></image-capture>
+        </div>
       </div>
-      <div class="col-sm-5">
-        <image-capture @reset="reset" @detected="onDetectionComplete"></image-capture>
-      </div>
-    </div>
     </section>
   </div>
 </template>
@@ -77,10 +225,12 @@ import "@ui5/webcomponents/dist/GroupHeaderListItem";
 import "@ui5/webcomponents/dist/Badge";
 import "@ui5/webcomponents/dist/CustomListItem";
 import "@ui5/webcomponents/dist/Input.js";
+import "@ui5/webcomponents/dist/Table";
+import "@ui5/webcomponents/dist/Popover";
 
 export default {
   mounted() {
-    this.items = JSON.parse(JSON.stringify(this.materialData.refList));
+    this.reset();
   },
   name: "app",
   data() {
@@ -94,8 +244,35 @@ export default {
     "image-capture": ImageCapture
   },
   methods: {
+    verify(item) {
+      var index = this.items.indexOf(item),
+        inputGR = parseInt(this.$refs["inputRcv" + item.id][0].value),
+        inputGM = parseInt(this.$refs["inputMissing" + item.id][0].value),
+        inputGD = parseInt(this.$refs["inputDamaged" + item.id][0].value);
+      var total = inputGR + inputGM + inputGD;
+      if (item.GI - total === 0) {
+        (item.GR = inputGR), (item.GM = inputGM), (item.GD = inputGD);
+        item.verified = true;
+        item.readonly = true;
+        this.$set(this.items, index, item);
+      } else {
+        this.$refs.verifyPopover.openBy(this.$refs["verifyBtn" + item.id][0]);
+      }
+    },
+    editPress(item) {
+      var index = this.items.indexOf(item);
+      item.readonly = !item.readonly;
+      this.$set(this.items, index, item);
+    },
     reset() {
       this.items = JSON.parse(JSON.stringify(this.materialData.refList));
+      this.items.forEach(element => {
+        element.GD = 0;
+        element.GM = element.GI - element.GR;
+        element.status = "Not Detected";
+        element.readonly = true;
+        element.verified = false;
+      });
     },
     onDetectionComplete(data) {
       var detectedItems = this.materialData.refList.filter(value =>
@@ -103,7 +280,9 @@ export default {
       );
       this.items.forEach(element => {
         if (detectedItems.find(o => o.id === element.id)) {
-          element.status = "Detected";
+          element.GR++;
+          element.GM = element.GM - element.GR;
+          element.status = "Auto Detected";
         }
       });
     }
