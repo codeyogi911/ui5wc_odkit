@@ -74,6 +74,8 @@
                     popin-text="Desc."
                     class="table-cell"
                     width="180px"
+                    min-width="800"
+                    demand-popin
                   >
                     <span style="line-height: 1.4rem">Description</span>
                   </ui5-table-column>
@@ -82,6 +84,7 @@
                     slot="columns"
                     popin-text="Batch"
                     demand-popin
+                    min-width="800"
                     class="table-cell"
                     width="50px"
                   >
@@ -92,6 +95,7 @@
                     slot="columns"
                     popin-text="Serial No."
                     demand-popin
+                    min-width="800"
                     class="table-cell"
                     width="150px"
                   >
@@ -267,6 +271,7 @@ export default {
     reset() {
       this.items = JSON.parse(JSON.stringify(this.materialData.refList));
       this.items.forEach(element => {
+        element.GR = 0;
         element.GD = 0;
         element.GM = element.GI - element.GR;
         element.status = "Not Detected";
@@ -285,6 +290,7 @@ export default {
           element.status = "Auto Detected";
         }
       });
+      this.$set(this.items);
     }
   }
 };

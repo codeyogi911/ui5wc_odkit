@@ -14,16 +14,19 @@
             v-show="imageHtml === null"
             ref="video"
             id="video"
-            width="640"
-            height="480"
+            width="100%"
+            height="100%"
             autoplay
           ></video>
+
           <ui5-messagestrip
+            style="width:auto;"
             v-show="imageHtml === null"
             type="Information"
             no-close-button
           >Place the kit in frame and click detect.</ui5-messagestrip>
           <ui5-messagestrip
+            style="width:auto;"
             v-show="imageHtml !== null"
             type="Positive"
             no-close-button
@@ -42,7 +45,7 @@
             v-show="imageHtml === null"
           >Detect</ui5-button>
         </div>
-        <ui5-popover ref="resultsPopover" header-text="Results">
+        <ui5-popover ref="resultsPopover" v-bind:header-text="popOverHeader">
           <div class="popover-content">
             <div class="flex-column">
               <ui5-label>{{errorMessage}}</ui5-label>
@@ -72,7 +75,8 @@ export default {
       requestDuration: 0,
       video: {},
       canvas: {},
-      captures: []
+      captures: [],
+      popOverHeader: ""
     };
   },
   mounted() {
@@ -130,6 +134,7 @@ export default {
             if (data.image) {
               that.imageHtml = data.image;
             } else {
+              that.popOverHeader = "Results";
               that.errorMessage = "Nothing found. Try again.";
               that.video.play();
               that.resultsPopover.openBy(that.video);
@@ -140,6 +145,7 @@ export default {
           }) // JSON-string from `response.json()` call
           .catch(error => {
             that.busyIndicator.active = false;
+            that.popOverHeader = "Service Offline";
             that.errorMessage = error.message + ", cannot connect to service";
             that.video.play();
             that.resultsPopover.openBy(that.video);

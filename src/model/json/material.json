@@ -15,8 +15,7 @@
             "serial": "565758766565",
             "name": "Drill",
             "partid": "1541218541AS",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 2,
@@ -25,8 +24,7 @@
             "serial": "565758766565",
             "name": "Screw",
             "partid": "1541454541A9",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 3,
@@ -35,8 +33,7 @@
             "serial": "565758766565",
             "name": "Bit 1",
             "partid": "1DCFV18541AS",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 4,
@@ -45,8 +42,7 @@
             "serial": "565758766565",
             "name": "Bit 8",
             "partid": "132323241AV",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 5,
@@ -55,8 +51,7 @@
             "serial": "565758766565",
             "name": "Bit 2",
             "partid": "CD1218541AS",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 6,
@@ -65,38 +60,34 @@
             "serial": "565758766565",
             "name": "Bit 6",
             "partid": "WDD3343541AS",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 7,
             "material": "IY1000",
             "batch":"TKE",
             "serial": "565758766565",
-            "name": "Sisors",
+            "name": "Power Adapter",
             "partid": "FSV534224200",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 8,
             "material": "IJ1000",
             "batch":"TKE",
             "serial": "565758766565",
-            "name": "Screw 2",
+            "name": "Bit 5",
             "partid": "CDRVR44342",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         },
         {
             "id": 9,
             "material": "IP1000",
             "batch":"TKE",
             "serial": "565758766565",
-            "name": "Knife",
+            "name": "Fixing Screw",
             "partid": "FDSDASC33242F",
-            "GI": 1,
-            "GR": 0
+            "GI": 1
         }
     ]
 }
